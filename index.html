@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill for Everyone — trade what you know</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500;600&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Ticket punch strip, sits behind every stub card -->
+<div class="grain"></div>
+
+<!-- ============ WELCOME ============ -->
+<section id="page-welcome" class="page active">
+  <div class="stub stub--hero">
+    <div class="stub__serial">NO. 000-EXCHANGE</div>
+    <div class="stamp stamp--corner">EST. TODAY</div>
+    <h1 class="brand">SKILL<span class="brand__x">⇄</span>EVERYONE</h1>
+    <p class="tagline">Hand over a skill, walk away with another. No money changes hands — just know-how.</p>
+    <div class="hero-ticket-row">
+      <div class="mini-stub">
+        <span class="mini-stub__label">You teach</span>
+        <span class="mini-stub__val" id="teachExample">Guitar basics</span>
+      </div>
+      <div class="swap-arrows" aria-hidden="true">⇄</div>
+      <div class="mini-stub">
+        <span class="mini-stub__label">You learn</span>
+        <span class="mini-stub__val" id="learnExample">Excel formulas</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn--primary" onclick="go('login')">Log in</button>
+      <button class="btn btn--ghost" onclick="go('signup')">Sign up</button>
+    </div>
+    <div class="perf"></div>
+    <p class="stub__foot">Tear along the line. Start trading below.</p>
+  </div>
+</section>
+
+<!-- ============ LOG IN ============ -->
+<section id="page-login" class="page">
+  <div class="stub stub--form">
+    <div class="stub__serial">NO. 001-LOGIN</div>
+    <h2 class="form-title">Log in</h2>
+    <p class="form-sub">Welcome back to the swap table.</p>
+    <form id="loginForm" onsubmit="return handleLogin(event)">
+      <label>Email
+        <input type="email" name="email" required placeholder="you@example.com">
+      </label>
+      <label>Password
+        <input type="password" name="password" required placeholder="••••••••" minlength="4">
+      </label>
+      <p class="form-error" id="loginError"></p>
+      <button type="submit" class="btn btn--primary btn--block">Enter the market</button>
+    </form>
+    <p class="switch-line">New here? <a href="#" onclick="go('signup');return false;">Create an account</a></p>
+    <p class="switch-line switch-line--muted"><a href="#" onclick="go('welcome');return false;">← Back</a></p>
+  </div>
+</section>
+
+<!-- ============ SIGN UP ============ -->
+<section id="page-signup" class="page">
+  <div class="stub stub--form">
+    <div class="stub__serial">NO. 002-SIGNUP</div>
+    <h2 class="form-title">Sign up</h2>
+    <p class="form-sub">Two minutes, then you're trading.</p>
+    <form id="signupForm" onsubmit="return handleSignup(event)">
+      <label>Name
+        <input type="text" name="name" required placeholder="Your name">
+      </label>
+      <label>Email
+        <input type="email" name="email" required placeholder="you@example.com">
+      </label>
+      <label>Password
+        <input type="password" name="password" required placeholder="At least 4 characters" minlength="4">
+      </label>
+      <p class="form-error" id="signupError"></p>
+      <button type="submit" class="btn btn--primary btn--block">Create account</button>
+    </form>
+    <p class="switch-line">Already a member? <a href="#" onclick="go('login');return false;">Log in</a></p>
+    <p class="switch-line switch-line--muted"><a href="#" onclick="go('welcome');return false;">← Back</a></p>
+  </div>
+</section>
+
+<!-- ============ HOME (hub, with persistent nav) ============ -->
+<div id="app-shell" class="app-shell">
+  <header class="topbar">
+    <div class="topbar__brand" onclick="go('home')">SKILL<span class="brand__x">⇄</span>EVERYONE</div>
+    <nav class="topbar__nav">
+      <button data-nav="home" onclick="go('home')">Home</button>
+      <button data-nav="discovery" onclick="go('discovery')">Discovery</button>
+      <button data-nav="exchanged" onclick="go('exchanged')">Exchanged skills</button>
+      <button data-nav="upload" onclick="go('upload')">Upload skills</button>
+    </nav>
+    <div class="topbar__user">
+      <span id="topbarUserName">Guest</span>
+      <button class="btn btn--tiny" onclick="handleLogout()">Log out</button>
+    </div>
+  </header>
+
+  <!-- ============ HOME PAGE ============ -->
+  <section id="page-home" class="page page--wide">
+    <div class="stamp stamp--floating">HOME PAGE</div>
+    <h2 class="section-title">Where to, <span id="homeUserName">friend</span>?</h2>
+    <p class="section-sub">Three ways through the market — pick your route.</p>
+    <div class="route-grid">
+      <button class="route-card" onclick="go('discovery')">
+        <span class="route-card__num">01</span>
+        <span class="route-card__title">Discovery</span>
+        <span class="route-card__desc">Browse skills people are offering to trade right now.</span>
+      </button>
+      <button class="route-card" onclick="go('exchanged')">
+        <span class="route-card__num">02</span>
+        <span class="route-card__title">Exchanged skills</span>
+        <span class="route-card__desc">Track the trades you've requested, sent and completed.</span>
+      </button>
+      <button class="route-card" onclick="go('upload')">
+        <span class="route-card__num">03</span>
+        <span class="route-card__title">Upload skills</span>
+        <span class="route-card__desc">List something you can teach so others can find it.</span>
+      </button>
+    </div>
+
+    <div class="stub stub--stats">
+      <div class="stat">
+        <span class="stat__num" id="statMySkills">0</span>
+        <span class="stat__label">Skills you offer</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num" id="statPending">0</span>
+        <span class="stat__label">Pending exchanges</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num" id="statDone">0</span>
+        <span class="stat__label">Completed swaps</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DISCOVERY ============ -->
+  <section id="page-discovery" class="page page--wide">
+    <h2 class="section-title">Discovery</h2>
+    <p class="section-sub">Skills the community is offering. Tap one to propose a trade.</p>
+    <div class="filter-row">
+      <input type="text" id="discoverySearch" placeholder="Search a skill, e.g. 'photography'" oninput="renderDiscovery()">
+      <select id="discoveryFilter" onchange="renderDiscovery()">
+        <option value="">All categories</option>
+        <option value="Creative">Creative</option>
+        <option value="Tech">Tech</option>
+        <option value="Language">Language</option>
+        <option value="Life">Life</option>
+        <option value="Business">Business</option>
+      </select>
+    </div>
+    <div class="ticket-grid" id="discoveryGrid"></div>
+  </section>
+
+  <!-- ============ EXCHANGE (request detail) ============ -->
+  <section id="page-exchange" class="page">
+    <div class="stub stub--form">
+      <div class="stub__serial" id="exchangeSerial">NO. 003-EXCHANGE</div>
+      <h2 class="form-title">Propose a trade</h2>
+      <p class="form-sub" id="exchangeWith">for a skill</p>
+      <form id="exchangeForm" onsubmit="return handleExchangeSubmit(event)">
+        <label>What you're requesting
+          <input type="text" id="exchangeRequesting" disabled>
+        </label>
+        <label>What you'll offer in return
+          <select id="exchangeOffering" required></select>
+        </label>
+        <label>Note to the other trader (optional)
+          <textarea id="exchangeNote" rows="3" placeholder="Suggest a time, format, or anything they should know."></textarea>
+        </label>
+        <p class="form-error" id="exchangeError"></p>
+        <div class="btn-row">
+          <button type="submit" class="btn btn--primary">Send trade request</button>
+          <button type="button" class="btn btn--ghost" onclick="go('discovery')">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ EXCHANGED SKILLS ============ -->
+  <section id="page-exchanged" class="page page--wide">
+    <h2 class="section-title">Exchanged skills</h2>
+    <p class="section-sub">Every trade you've proposed or received, stamped by status.</p>
+    <div class="tabs">
+      <button class="tab active" data-status="all" onclick="setExchangeTab('all', this)">All</button>
+      <button class="tab" data-status="Pending" onclick="setExchangeTab('Pending', this)">Pending</button>
+      <button class="tab" data-status="Completed" onclick="setExchangeTab('Completed', this)">Completed</button>
+    </div>
+    <div class="exchange-list" id="exchangeList"></div>
+  </section>
+
+  <!-- ============ UPLOAD SKILLS ============ -->
+  <section id="page-upload" class="page">
+    <div class="stub stub--form">
+      <div class="stub__serial">NO. 004-UPLOAD</div>
+      <h2 class="form-title">Upload a skill</h2>
+      <p class="form-sub">Tell the market what you can teach.</p>
+      <form id="uploadForm" onsubmit="return handleUploadSkill(event)">
+        <label>Skill title
+          <input type="text" name="title" required placeholder="e.g. Watercolor painting for beginners">
+        </label>
+        <label>Category
+          <select name="category" required>
+            <option value="">Choose one</option>
+            <option>Creative</option>
+            <option>Tech</option>
+            <option>Language</option>
+            <option>Life</option>
+            <option>Business</option>
+          </select>
+        </label>
+        <label>Level you can teach
+          <select name="level" required>
+            <option value="">Choose one</option>
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </label>
+        <label>Description
+          <textarea name="description" rows="3" required placeholder="What will the other person walk away knowing?"></textarea>
+        </label>
+        <p class="form-error" id="uploadError"></p>
+        <button type="submit" class="btn btn--primary btn--block">List this skill</button>
+      </form>
+      <p class="form-note">Listed skills appear in Discovery under your name and become tradeable in Exchange.</p>
+    </div>
+
+    <div class="my-skills">
+      <h3 class="my-skills__title">Your listed skills</h3>
+      <div class="my-skills__grid" id="mySkillsGrid"></div>
+    </div>
+  </section>
+
+</div><!-- /app-shell -->
+
+<!-- في نهاية ملف index.html وقبل إغلاق body -->
+<div class="toast" id="toast"></div>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,643 @@
+/* ==========================================================================
+   1. VARIABLES & MODERN COLOR PALETTE
+   ========================================================================== */
+:root {
+  --bg-color: #f8fafc;        /* Slate 50 - خلفية فاتحة ومريحة */
+  --card-bg: #ffffff;         /* كروت بيضاء ناصعة */
+  --text-main: #0f172a;       /* Slate 900 - نص داكن شديد الوضوح */
+  --text-muted: #64748b;      /* Slate 500 - نص فرعي متناسق */
+  --primary: #4f46e5;         /* Indigo 600 - لون أساسي عصري */
+  --primary-hover: #4338ca;   /* Indigo 700 */
+  --accent: #10b981;          /* Emerald 500 - لمسات إنجاز وتفاعل */
+  --border-color: #e2e8f0;    /* Slate 200 - حدود ناعمة جداً */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --font-brand: 'Bebas Neue', sans-serif;
+  --font-sans: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.grain {
+  display: none; /* إزالة ملمس الورق القديم للحصول على مظهر مودرن نظيف */
+}
+
+/* ==========================================================================
+   2. TYPOGRAPHY & BUTTONS
+   ========================================================================== */
+.brand {
+  font-family: var(--font-brand);
+  font-size: 3rem;
+  letter-spacing: 1.5px;
+  line-height: 1;
+  color: var(--text-main);
+}
+
+.brand__x {
+  color: var(--primary);
+  margin: 0 4px;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+
+.section-sub {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+/* Modern Rounded Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.6rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.btn--primary {
+  background-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+.btn--primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+}
+
+.btn--ghost {
+  background-color: #f1f5f9;
+  color: var(--text-main);
+}
+
+.btn--ghost:hover {
+  background-color: #e2e8f0;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn--tiny {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  background-color: #f1f5f9;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+}
+
+.btn--tiny:hover {
+  color: #dc2626;
+  background-color: #fee2e2;
+}
+
+.btn-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Modern Form Inputs */
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 1.25rem;
+}
+
+input, select, textarea {
+  padding: 0.85rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: #ffffff;
+  color: var(--text-main);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+.form-error {
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.switch-line {
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.switch-line a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.switch-line a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   3. NAVIGATION & LAYOUT
+   ========================================================================== */
+.page {
+  display: none;
+  width: 100%;
+  max-width: 480px;
+  margin: auto;
+  padding: 2.5rem 1rem;
+}
+
+.page.active {
+  display: block;
+}
+
+.page--wide {
+  max-width: 960px;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Floating Glassmorphism Topbar */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.topbar__brand {
+  font-family: var(--font-brand);
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.topbar__nav {
+  display: flex;
+  gap: 0.5rem;
+  background-color: #f1f5f9;
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
+}
+
+.topbar__nav button {
+  background: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 6px;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.topbar__nav button:hover {
+  color: var(--text-main);
+}
+
+.topbar__nav button.active {
+  color: var(--primary);
+  background-color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.topbar__user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   4. CARDS & STUBS DESIGN
+   ========================================================================== */
+.stub {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  position: relative;
+  box-shadow: var(--shadow-md);
+}
+
+.stub__serial {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.stamp {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.stamp--corner {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background-color: #ecfdf5;
+  color: var(--accent);
+  border: 1px solid #a7f3d0;
+}
+
+.hero-ticket-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8fafc;
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  margin: 1.75rem 0;
+  border: 1px solid var(--border-color);
+}
+
+.mini-stub__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.mini-stub__val {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.swap-arrows {
+  font-size: 1.2rem;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.stub__foot {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+/* ==========================================================================
+   5. ROUTE CARDS & STATS
+   ========================================================================== */
+.route-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.route-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25 ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+}
+
+.route-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(79, 70, 229, 0.4);
+}
+
+.route-card__num {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.route-card__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.route-card__desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* Stats Box */
+.stub--stats {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  padding: 1.75rem;
+  background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+  color: #ffffff;
+  border: none;
+}
+
+.stub--stats .stat__num {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.stub--stats .stat__label {
+  font-size: 0.8rem;
+  color: #c7d2fe;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* ==========================================================================
+   6. DISCOVERY & FILTERING
+   ========================================================================== */
+.filter-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filter-row input {
+  flex: 1;
+}
+
+.ticket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+/* Toast Modern Notification */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--text-main);
+  color: #ffffff;
+  padding: 0.85rem 1.4rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 200;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   7. MEDIA QUERIES
+   ========================================================================== */
+@media (max-width: 640px) {
+  .topbar {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .topbar__nav {
+    justify-content: space-between;
+  }
+
+  .filter-row {
+    flex-direction: column;
+  }
+
+  .stub--stats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+/* ==========================================================================
+   8. EXCHANGED SKILLS & TABS DESIGN
+   ========================================================================== */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.75rem;
+}
+
+.tab {
+  padding: 0.5rem 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab:hover {
+  color: var(--text-main);
+  background-color: #f1f5f9;
+}
+
+.tab.active {
+  color: var(--primary);
+  background-color: #e0e7ff;
+  border-color: rgba(79, 70, 229, 0.2);
+}
+
+/* Empty State Message */
+.exchange-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.exchange-list:empty::after,
+.exchange-list p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background-color: var(--card-bg);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Exchange Item Card Styling */
+.exchange-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.exchange-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(79, 70, 229, 0.3);
+}
+
+/* Status Badges */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge--pending {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.badge--completed {
+  background-color: #d1fae5;
+  color: #059669;
+}
+/* ==========================================================================
+   STRICT SKILL CARD BOX DESIGN
+   ========================================================================== */
+.skill-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease-in-out;
+}
+
+.skill-card:hover {
+  border-color: #6366f1;
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.12);
+  transform: translateY(-3px);
+}
+
+.skill-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.skill-card__tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #4f46e5;
+  background-color: #e0e7ff;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+}
+
+.skill-card__level {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.skill-card__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.skill-card__desc {
+  font-size: 0.875rem;
+  color: #475569;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.skill-card__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 0.75rem;
+}
+
+.skill-card__owner {
+  font-size: 0.8rem;
+  color: #64748b;
+}
